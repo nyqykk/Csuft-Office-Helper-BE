@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "~1.4.4",
+    "crypto-js": "^4.0.0",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
