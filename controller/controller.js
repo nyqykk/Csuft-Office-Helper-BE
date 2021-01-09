@@ -32,6 +32,7 @@ module.exports = async function (req, res) {
       list.each(function (index, ele) {
         if ($(this).text().indexOf('公共选修课修读情况') === -1) {
           obj[name[num]] = $(ele).text()
+          obj['key'] = String(index)
           if (!flag) {
             num++
             if (num >= 7) {
