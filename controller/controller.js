@@ -92,7 +92,7 @@ module.exports = async function (req, res) {
     })
 
   } catch (err) {
-    logger.info(`失败, ${$('div #Top1_divLoginName').text()}, ${JSID}, ${err}`)
+    logger.info(`失败, ${username}, ${JSID}, ${err}`)
     res.send(new resEr(err))
   }
 }
