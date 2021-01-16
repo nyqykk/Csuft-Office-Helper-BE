@@ -1,5 +1,6 @@
 const request = require('request')
 const cheerio = require('cheerio')
+const log4js = require('log4js')
 const getJSID = require('../crawler/main.js')
 const {
   resOK,
