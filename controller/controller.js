@@ -5,6 +5,31 @@ const {
   resOK,
   resEr
 } = require('../response.js')
+
+log4js.configure({
+  appenders: {
+    cheese: {
+      type: "file",
+      filename: process.cwd() + "/logs/log.log",
+      maxLogSize: 20971520,
+      backups: 10,
+      encoding: "utf-8",
+    }
+  },
+  categories: {
+    cheese: {
+      appenders: ["cheese"],
+      level: "info"
+    },
+    default: {
+      appenders: ["cheese"],
+      level: "info"
+    }
+  }
+});
+
+const logger = log4js.getLogger("cheese");
+
 module.exports = async function (req, res) {
   const {
     username,
@@ -19,7 +44,11 @@ module.exports = async function (req, res) {
         'Cookie': JSID
       },
       gzip: true
-    }, (r1, r2, body) => {
+    }, (err, ress, body) => {
+      if (err || ress.statusCode != 200) {
+        logger.error(`失败, ${$('div #Top1_divLoginName').text()}, ${JSID}, Error: ${err}`)
+        return res.send(new resEr(`网络波动`))
+      }
       const $ = cheerio.load(body)
       let num = 0
       let position = 0
@@ -53,6 +82,7 @@ module.exports = async function (req, res) {
           flag = 1
         }
       })
+      logger.info(`成功, ${$('div #Top1_divLoginName').text()}, ${JSID}`)
       res.send(new resOK({
         lastList,
         position
@@ -61,6 +91,7 @@ module.exports = async function (req, res) {
     })
 
   } catch (err) {
+    logger.info(`失败, ${$('div #Top1_divLoginName').text()}, ${JSID}, ${err}`)
     res.send(new resEr(err))
   }
 }
