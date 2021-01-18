@@ -36,6 +36,10 @@ module.exports = async function (req, res) {
     username,
     pwd
   } = req.body
+  if (!username || !pwd) {
+    console.log("账号或密码为空");
+    return res.send(new resEr('Account wrong or request too fast'))
+  }
   try {
     const JSID = await getJSID(username, pwd)
     request({
@@ -92,7 +96,7 @@ module.exports = async function (req, res) {
     })
 
   } catch (err) {
-    logger.info(`失败, ${username}, ${JSID}, ${err}`)
+    logger.info(`失败, ${username}, ${err}`)
     res.send(new resEr(err))
   }
 }

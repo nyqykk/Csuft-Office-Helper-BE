@@ -1,3 +1,4 @@
+const rateLimit = require('express-rate-limit')
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -7,6 +8,13 @@ var logger = require('morgan');
 var indexRouter = require('./router.js');
 
 var app = express();
+
+const limiter = rateLimit({
+  windowMs: 30 * 1000,
+  max: 100
+})
+
+app.use(limiter)
 
 /*解决跨域携带cookie问题*/
 app.all('*', function (req, res, next) {

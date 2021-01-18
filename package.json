@@ -11,6 +11,7 @@
     "crypto-js": "^4.0.0",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "express-rate-limit": "^5.2.3",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "log4js": "^6.3.0",
