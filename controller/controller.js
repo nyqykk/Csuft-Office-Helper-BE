@@ -1,4 +1,4 @@
-﻿const request = require('request')
+const request = require('request')
 const cheerio = require('cheerio')
 const log4js = require('log4js')
 
