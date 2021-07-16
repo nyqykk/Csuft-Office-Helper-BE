@@ -12,10 +12,9 @@ var app = express();
 
 /*解决跨域携带cookie问题*/
 app.all('*', function (req, res, next) {
-  if(!req.headers.origin || req.headers.origin.indexOf('http://www.csuft.info')===-1){
-    return next(createError(404));
-  }
+
   res.header("Access-Control-Allow-Origin", req.headers.origin); //需要显示设置来源
+  res.header("Access-Control-Max-Age", 7200);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
   res.header("Access-Control-Allow-Credentials", true); //带cookies7     res.header("Content-Type", "application/json;charset=utf-8");
